@@ -50,7 +50,7 @@ services:
       - ${SEAFILE_SHARED_DATA:-./data}:/shared
     env_file:
       - .env
-    user: "466367:466367" #hetzner-box uid for ownership
+#    user: "466367:466367" #hetzner-box uid for ownership
     ports:
       - "127.0.0.1:8080:80"
       - "127.0.0.1:8082:8082"
