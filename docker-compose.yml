@@ -25,9 +25,9 @@ services:
       start_period: 30s
       timeout: 5s
       retries: 10
-    logging:
-      options:
-        max-size: "10m"
+#    logging:
+#      options:
+#        max-size: "10m"
 #        max-file: "3"
 
   memcached:
@@ -37,9 +37,9 @@ services:
     entrypoint: memcached -m 256
     networks:
       - seafile-net
-    logging:
-      options:
-        max-size: "10m"
+#    logging:
+#      options:
+#        max-size: "10m"
 #        max-file: "3"
 
   seafile:
@@ -61,9 +61,9 @@ services:
         condition: service_started
     networks:
       - seafile-net
-    logging:
-      options:
-        max-size: "10m"
+#    logging:
+#      options:
+#        max-size: "10m"
 #        max-file: "3"
 
 networks:
