@@ -61,7 +61,6 @@ services:
         condition: service_started
     networks:
       - seafile-net
-      - proxy-net
     logging:
       options:
         max-size: "10m"
