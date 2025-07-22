@@ -48,7 +48,7 @@ services:
     restart: unless-stopped
     volumes:
       - ${SEAFILE_SHARED_DATA:-./data}:/shared
-      - /mnt/hetzner-box/seafile-data:/shared/seafile-data
+#      - /mnt/hetzner-box/seafile-data:/shared/seafile-data
     env_file:
       - .env
 #    user: "466367:466367" #hetzner-box uid for ownership
