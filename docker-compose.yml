@@ -52,7 +52,7 @@ services:
       - .env
 #    user: "466367:466367" #hetzner-box uid for ownership
     ports:
-      - "127.0.0.1:8000:8000"  # Seahub web interface
+      - "0.0.0.0:8000:8000"  # Seahub web interface
       - "127.0.0.1:8082:8082"  # SeafHTTP file server
     depends_on:
       db:
