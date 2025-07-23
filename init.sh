@@ -1,5 +1,5 @@
 docker exec -it seafile sed -i 's/bind = "127.0.0.1:8000"/bind = "0.0.0.0:8000"/' /opt/seafile/conf/gunicorn.conf.py
-echo "CSRF_TRUSTED_ORIGINS = ['https://seafile.caldetas.com']" >> data/seafile/conf/seahub_settings.py
+echo "CSRF_TRUSTED_ORIGINS = ['https://seafile.caldetas.com']" | sudo tee -a data/seafile/conf/seahub_settings.py > /dev/null
 docker exec -it seafile /opt/seafile/seafile-server-latest/seahub.sh restart
 
 
