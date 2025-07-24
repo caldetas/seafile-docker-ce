@@ -17,6 +17,6 @@ echo "Database restore complete."
 
 # Restore seafile data
 echo "Restoring seafile-data directory..."
-rsync -vr backup/seafile-data/ data/seafile/seafile-data/
+rsync -aHvr backup/seafile-data/ data/seafile/seafile-data/
 
 echo "Data restore complete."
