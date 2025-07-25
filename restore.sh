@@ -1,22 +1,29 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+RESTORE_DIR="/mnt/hetzner-box/backup/restore"
+DATA_DIR="/mnt/nas/seafile-data"
 cd "$SCRIPT_DIR"
 
 set -a; source .env; set +a
 
 echo "Starting restore process..."
 
+
+mkdir -p /mnt/hetzner-box/backup/restore
+rm -fr /mnt/hetzner-box/backup/restore/*
+borgmatic extract --archive latest --destination $RESTORE_DIR
+
 # Restore database dumps
 echo "Restoring MySQL databases..."
-docker compose exec -T db mysql -u root --password="$DB_ROOT_PASSWD" ccnet_db < backup/db/ccnet.sql
-docker compose exec -T db mysql -u root --password="$DB_ROOT_PASSWD" seafile_db < backup/db/seafile.sql
-docker compose exec -T db mysql -u root --password="$DB_ROOT_PASSWD" seahub_db < backup/db/seahub.sql
+docker compose exec -T db mysql -u root --password="$DB_ROOT_PASSWD" ccnet_db < $RESTORE_DIR/$SCRIPT_DIR/backup/db/ccnet.sql
+docker compose exec -T db mysql -u root --password="$DB_ROOT_PASSWD" seafile_db < $RESTORE_DIR/$SCRIPT_DIR/backup/db/seafile.sql
+docker compose exec -T db mysql -u root --password="$DB_ROOT_PASSWD" seahub_db < $RESTORE_DIR/$SCRIPT_DIR/backup/db/seahub.sql
 
 echo "Database restore complete."
 
 # Restore seafile data
 echo "Restoring seafile-data directory..."
-rsync -aHvr backup/seafile-data/ data/seafile/seafile-data/
+rsync -aHvr $RESTORE_DIR/$DATA_DIR $DATA_DIR/
 
 echo "Data restore complete."
