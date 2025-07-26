@@ -29,5 +29,6 @@ echo "Database restore complete."
 echo "Restoring seafile-data directory..."
 rsync -aHvr $RESTORE_DIR$DATA_DIR $DATA_DIR/
 chown -R root:root $DATA_DIR
+rm -fr $RESTORE_DIR/* || true
 
 echo "Data restore complete."
