@@ -5,7 +5,7 @@
   DATA_DIR="$SCRIPT_DIR/data/seafile/seafile-data"
   cd "$SCRIPT_DIR"
 
-  set -a; source .env; set +a
+  set -a; source  /run/secrets/seafile/.env; set +a
 
   echo "Starting restore process..."
 
@@ -28,5 +28,6 @@ echo "Database restore complete."
 # Restore seafile data
 echo "Restoring seafile-data directory..."
 rsync -aHvr $RESTORE_DIR$DATA_DIR $DATA_DIR/
+chown -R root:root $DATA_DIR
 
 echo "Data restore complete."
