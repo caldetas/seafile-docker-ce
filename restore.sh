@@ -10,8 +10,8 @@
   echo "Starting restore process..."
 
 
-  mkdir -p /mnt/hetzner-box/backup/restore
-  rm -fr /mnt/hetzner-box/backup/restore/* || true
+  mkdir -p $RESTORE_DIR
+  rm -fr $RESTORE_DIR/* || true
   borgmatic extract --archive latest --destination $RESTORE_DIR
 
   echo $RESTORE_DIR$SCRIPT_DIR
