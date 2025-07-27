@@ -11,7 +11,7 @@
 
 
   mkdir -p $RESTORE_DIR
-  #rm -fr $RESTORE_DIR/* || true
+  rm -fr $RESTORE_DIR/* || true
   borgmatic extract --archive latest --destination $RESTORE_DIR
 
   echo $RESTORE_DIR$SCRIPT_DIR
@@ -29,6 +29,6 @@ echo "Database restore complete."
 echo "Restoring seafile-data directory..."
 rsync -aHvr $RESTORE_DIR$DATA_DIR/ $DATA_DIR/
 #chown -R root:root $DATA_DIR #necessary?
-#rm -fr $RESTORE_DIR/* || true
+rm -fr $RESTORE_DIR/* || true
 
 echo "Data restore complete."
