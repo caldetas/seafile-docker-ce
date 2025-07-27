@@ -33,7 +33,10 @@ echo "Database restore complete."
 echo "Restoring seafile data directories..."
 rsync -aHr $RESTORE_DIR$DATA_DIR/ $DATA_DIR/
 echo "Restoring seafile data blocks directories..."
+
 rsync -aHr $RESTORE_DIR$SEAFILE_DATA_BLOCKS_DIR/ $SEAFILE_DATA_BLOCKS_DIR #$DATA_DIR/seafile-data/ for local install
+chown -R root:root $SEAFILE_DATA_BLOCKS_DIR #only necessary with external block storage
+
 chown -R root:root $DATA_DIR
 rm -fr $RESTORE_DIR/* || true
 
