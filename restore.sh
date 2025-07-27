@@ -28,7 +28,12 @@ echo "Database restore complete."
 # Restore seafile data
 echo "Restoring seafile-data directory..."
 rsync -aHvr $RESTORE_DIR$DATA_DIR/ $DATA_DIR/
-#chown -R root:root $DATA_DIR #necessary?
+chown -R root:root $DATA_DIR #necessary?
 rm -fr $RESTORE_DIR/* || true
 
-echo "Data restore complete."
+echo "Data restore complete. Restarting Docker Compose.."
+
+systemctl stop seafile-docker-compose.service
+systemctl start seafile-docker-compose.service
+
+echo "Restoration complete. Exiting.."
