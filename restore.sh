@@ -26,9 +26,9 @@ docker compose exec -T db mysql -u root --password="$DB_ROOT_PASSWD" seahub_db <
 echo "Database restore complete."
 
 # Restore seafile data
-echo "Restoring seafile-data directory..."
-rsync -aHvr $RESTORE_DIR$DATA_DIR/ $DATA_DIR/
-chown -R root:root $DATA_DIR #necessary?
+echo "Restoring seafile data directories..."
+rsync -aHr $RESTORE_DIR$DATA_DIR/ $DATA_DIR/
+chown -R root:root $DATA_DIR
 rm -fr $RESTORE_DIR/* || true
 
 echo "Data restore complete. Restarting Docker Compose.."
