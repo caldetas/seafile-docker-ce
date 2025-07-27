@@ -17,6 +17,7 @@
 
 
   mkdir -p $RESTORE_DIR
+  mkdir -p $SEAFILE_DATA_BLOCKS_DIR
   rm -fr $RESTORE_DIR/* || true
   borgmatic extract --archive latest --destination $RESTORE_DIR
 
@@ -34,7 +35,6 @@ echo "Restoring seafile data directories..."
 rsync -aHr $RESTORE_DIR$DATA_DIR/ $DATA_DIR/
 echo "Restoring seafile data blocks directories..."
 
-mkdir -p $SEAFILE_DATA_BLOCKS_DIR
 rsync -aHr $RESTORE_DIR$SEAFILE_DATA_BLOCKS_DIR/ $SEAFILE_DATA_BLOCKS_DIR #$DATA_DIR/seafile-data/ for local install
 chown -R root:root $SEAFILE_DATA_BLOCKS_DIR #only necessary with external block storage
 
