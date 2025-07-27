@@ -1,4 +1,5 @@
   #!/usr/bin/env bash
+  set -euo pipefail
 
   SCRIPT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
   RESTORE_DIR="/mnt/hetzner-box/backup/nixcz/restore"
