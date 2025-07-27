@@ -2,7 +2,7 @@
 
   SCRIPT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
   RESTORE_DIR="/mnt/hetzner-box/backup/nixcz/restore"
-  DATA_DIR="$SCRIPT_DIR/data/seafile/seafile-data"
+  DATA_DIR="$SCRIPT_DIR/data/seafile"
   cd "$SCRIPT_DIR"
 
   set -a; source  /run/secrets/seafile/.env; set +a
@@ -11,7 +11,7 @@
 
 
   mkdir -p $RESTORE_DIR
-  rm -fr $RESTORE_DIR/* || true
+  #rm -fr $RESTORE_DIR/* || true
   borgmatic extract --archive latest --destination $RESTORE_DIR
 
   echo $RESTORE_DIR$SCRIPT_DIR
@@ -27,8 +27,8 @@ echo "Database restore complete."
 
 # Restore seafile data
 echo "Restoring seafile-data directory..."
-rsync -aHvr $RESTORE_DIR$DATA_DIR $DATA_DIR/
-chown -R root:root $DATA_DIR
-rm -fr $RESTORE_DIR/* || true
+rsync -aHvr $RESTORE_DIR$DATA_DIR/ $DATA_DIR/
+#chown -R root:root $DATA_DIR #necessary?
+#rm -fr $RESTORE_DIR/* || true
 
 echo "Data restore complete."
