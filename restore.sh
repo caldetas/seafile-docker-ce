@@ -2,7 +2,7 @@
   set -euo pipefail
 
   SCRIPT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
-  RESTORE_DIR="/mnt/hetzner-box/backup/nixcz/restore"
+  RESTORE_DIR="/mnt/backup/nixcz/restore"
   DATA_DIR="$SCRIPT_DIR/data/seafile"
   SEAFILE_DATA_BLOCKS_DIR="/mnt/nas/seafile-data" #if actual data is stored on external mount
   cd "$SCRIPT_DIR"
