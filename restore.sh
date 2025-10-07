@@ -1,6 +1,10 @@
   #!/usr/bin/env bash
   set -euo pipefail
 
+  # first reinstall seafile fresh (delete git folder and rebuild)
+  # second uncomment the external storage line in docker-compose
+  # third run sudo ./setup.sh
+
   SCRIPT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
   RESTORE_DIR="/mnt/backup/nixcz/restore"
   DATA_DIR="$SCRIPT_DIR/data/seafile"
