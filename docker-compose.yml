@@ -30,11 +30,16 @@ services:
 #        max-size: "10m"
 #        max-file: "3"
 
-  memcached:
-    image: memcached:1.6
-    container_name: seafile-memcached
+  redis:
+    image: redis
+    container_name: seafile-redis
     restart: unless-stopped
-    entrypoint: memcached -m 256
+    command:
+      - /bin/sh
+      - -c
+      - redis-server --requirepass "$$REDIS_PASSWORD"
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
     networks:
       - seafile-net
 #    logging:
@@ -91,7 +96,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      memcached:
+      redis:
         condition: service_started
     networks:
       - seafile-net
