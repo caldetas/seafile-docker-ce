@@ -6,7 +6,8 @@
   #    - seafile-docker-ce # git conf folder with dbs
 
   # first reinstall seafile fresh (delete git folder and rebuild)
-  # second uncomment the external storage line in docker-compose
+  # second !!!important!!!
+  # uncomment the external storage line in docker-compose
   # third run sudo ./setup.sh
 
   SCRIPT_DIR="/home/caldetas/git/seafile-docker-ce"
