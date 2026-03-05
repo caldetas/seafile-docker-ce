@@ -2,8 +2,8 @@
   set -euo pipefail
 
   #the restore directory ($RESTORE_DIR) should contain these two folders from the backup:
-  #    - seafile-data
-  #    - seafile-docker-ce
+  #    - seafile-data # external storage blocks folder
+  #    - seafile-docker-ce # git conf folder with dbs
 
   # first reinstall seafile fresh (delete git folder and rebuild)
   # second uncomment the external storage line in docker-compose
@@ -50,3 +50,15 @@ echo "Data restore complete. Restarting Docker Compose.."
 systemctl start seafile-docker-compose.service
 
 echo "Restoration complete. Exiting.."
+
+# todo: local restore should be downloadable and uploadable via web interface
+#       right now fastest way to restore files is to connect seafile client to local instance (http://127.0.0.1:8000)
+#       tried so far and only working with seafile client:
+# .env:
+#       SEAFILE_SERVER_HOSTNAME=127.0.0.1
+#       SEAFILE_SERVER_PROTOCOL=http
+#
+# seafile-docker-ce/data/seafile/conf/seahub_settings.py:
+# append the following lines
+#       FILE_SERVER_ROOT = 'http://127.0.0.1:8000/seafhttp'
+#       CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://localhost:8000']
