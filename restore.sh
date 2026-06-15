@@ -52,14 +52,27 @@ systemctl start seafile-docker-compose.service
 
 echo "Restoration complete. Exiting.."
 
-# todo: local restore should be downloadable and uploadable via web interface
-#       right now fastest way to restore files is to connect seafile client to local instance (http://127.0.0.1:8000)
-#       tried so far and only working with seafile client:
+#      alternative way to restore files is to connect seafile client to local instance (http://127.0.0.1:8000)
+#
 # .env:
 #       SEAFILE_SERVER_HOSTNAME=127.0.0.1
 #       SEAFILE_SERVER_PROTOCOL=http
 #
-# seafile-docker-ce/data/seafile/conf/seahub_settings.py:
-# append the following lines
-#       FILE_SERVER_ROOT = 'http://127.0.0.1:8000/seafhttp'
-#       CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://localhost:8000']
+#activate nginx
+#before:
+#    # Nginx reverse proxy
+#    services.nginx = {
+#      enable = true;
+#      virtualHosts = {
+#        "seafile.${vars.domain}" = {
+#          enableACME = true;
+#          forceSSL = true;
+#after:
+#    services.nginx = {
+#      enable = true;
+#      virtualHosts = {
+#        "127.0.0.1" = {
+#          #              enableACME = true;
+#          #              forceSSL = true;
+#
+#access http://127.0.0.1
